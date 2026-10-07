@@ -4,113 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sports & Lottery Analytics - Bank Basketman</title>
-    <!-- Tailwind CSS CDN -->
+    <!-- Tailwind CSS & FontAwesome -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
-        
+        @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700&display=swap');
         body { 
-            font-family: 'Kanit', sans-serif;
-            /* Background image setup with dark overlay fallback */
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.92)), 
-                        url('https://i.postimg.cc/qRqghvh7/casino-night-background-with-golden-chips-playing-cards-dice-1270132-6068.avif') no-repeat center center fixed;
+            font-family: 'Kanit', sans-serif; 
+            background-image: linear-gradient(to bottom, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.95)), 
+                              url('https://i.postimg.cc/qRqghvh7/casino-night-background-with-golden-chips-playing-cards-dice-1270132-6068.avif');
             background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
         }
-
-        /* Custom Scrollbar for Chat Box */
-        ::-webkit-scrollbar {
+        /* Custom Scrollbar สำหรับช่อง AI แชต */
+        .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
         }
-        ::-webkit-scrollbar-track {
+        .custom-scrollbar::-webkit-scrollbar-track {
             background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
         }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(217, 119, 6, 0.5);
-            border-radius: 4px;
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(245, 158, 11, 0.4);
+            border-radius: 10px;
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(217, 119, 6, 0.8);
-        }
-
-        /* Glassmorphism Effect */
-        .glass-panel {
-            background: rgba(30, 41, 59, 0.75);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(245, 158, 11, 0.8);
         }
     </style>
 </head>
-<body class="text-slate-100 min-h-screen flex flex-col justify-between">
+<body class="text-white min-h-screen flex flex-col antialiased">
 
     <!-- Header -->
-    <header class="glass-panel sticky top-0 z-30 border-b border-amber-500/20 shadow-2xl">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex justify-between items-center">
+    <header class="bg-slate-900/80 backdrop-blur-md border-b border-amber-500/20 p-4 sticky top-0 z-20 shadow-lg">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="text-lg md:text-2xl font-bold text-amber-400 flex items-center gap-2 drop-shadow-md">
+                <i class="fa-solid fa-brain"></i> Analytics & AI Center
+            </h1>
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-yellow-400 flex items-center justify-center text-slate-950 font-bold shadow-lg shadow-amber-500/20">
-                    <i class="fa-solid fa-crown text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-lg md:text-2xl font-bold bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-500 bg-clip-text text-transparent">
-                        Sports & Lottery Analytics
-                    </h1>
-                    <p class="text-[11px] text-amber-200/70 hidden sm:block">ศูนย์วิเคราะห์ผลกีฬาและทำนายตัวเลขด้วยระบบ AI</p>
-                </div>
-            </div>
-            
-            <div class="flex items-center gap-2">
-                <span class="bg-gradient-to-r from-amber-500/20 to-yellow-500/20 text-amber-300 border border-amber-500/40 px-3 py-1.5 rounded-full text-xs font-semibold shadow-md flex items-center gap-1.5">
-                    <i class="fa-solid fa-user-check text-amber-400"></i>
-                    <span>ทำนายผลโดย Bank Basketman</span>
+                <span class="text-xs md:text-sm bg-gradient-to-r from-amber-500/20 to-amber-600/30 text-amber-300 border border-amber-500/40 px-3.5 py-1.5 rounded-full font-semibold shadow-inner">
+                    ทำนายผลโดย Bank Basketman
                 </span>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Container -->
-    <main class="max-w-6xl mx-auto w-full flex-1 p-4 grid grid-cols-1 lg:grid-cols-12 gap-6 my-2">
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto w-full flex-1 p-4 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-        <!-- Left Column: Lottery & Match Analytics (7 Cols) -->
+        <!-- Left Column: Lottery & Match Center (7 cols) -->
         <div class="lg:col-span-7 space-y-6">
 
-            <!-- 1. Lottery Predictor Box -->
-            <section class="glass-panel p-5 rounded-2xl shadow-2xl border-t-2 border-t-amber-500/50">
-                <div class="flex justify-between items-center mb-4 border-b border-slate-700/80 pb-3">
-                    <h2 class="text-lg font-bold text-amber-400 flex items-center gap-2">
-                        <i class="fa-solid fa-dice text-amber-400"></i> ทำนายหวยไทย & หวยลาว
-                    </h2>
-                    <span class="text-xs bg-amber-500/20 text-amber-300 px-2.5 py-0.5 rounded-full border border-amber-500/30">AI Calculation</span>
-                </div>
+            <!-- 1. ระบบทำนายหวย (ไทย & ลาว) -->
+            <div class="bg-slate-900/80 backdrop-blur-md p-5 rounded-2xl border border-amber-500/30 shadow-2xl">
+                <h2 class="text-lg font-bold text-amber-400 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-ticket"></i> ทำนายหวยไทย & หวยลาว
+                </h2>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    <!-- Lottery Selection -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                    <!-- เลือกประเภทหวย -->
                     <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1.5">เลือกประเภทหวย</label>
-                        <select id="lotteryType" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 text-sm text-amber-200 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500">
+                        <label class="block text-xs text-slate-300 mb-1">เลือกประเภทหวย</label>
+                        <select id="lotteryType" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition">
                             <option value="thai">🇹🇭 หวยไทย (รัฐบาล)</option>
                             <option value="lao">🇱🇦 หวยลาว (พัฒนา)</option>
                         </select>
                     </div>
 
-                    <!-- Analysis Method -->
+                    <!-- เลือกวิธีคำนวณ -->
                     <div>
-                        <label class="block text-xs font-medium text-slate-300 mb-1.5">ข้อมูลสำหรับวิเคราะห์</label>
-                        <select id="analysisMethod" onchange="toggleLotteryInputs()" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 text-sm text-amber-200 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500">
-                            <option value="stats">📊 สถิติตัวเลขความถี่สูง</option>
-                            <option value="birthday">🎂 คำนวณจากวันเกิด</option>
-                            <option value="dream">🌙 คำนวณจากทำนายความฝัน</option>
+                        <label class="block text-xs text-slate-300 mb-1">ข้อมูลวิเคราะห์</label>
+                        <select id="analysisMethod" onchange="toggleLotteryInputs()" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition">
+                            <option value="stats">📊 สถิติตัวเลขย้อนหลัง</option>
+                            <option value="birthday">🎂 วันเกิดผู้ซื้อ</option>
+                            <option value="dream">🌙 ความฝัน</option>
                         </select>
                     </div>
                 </div>
 
-                <!-- Dynamic Inputs -->
-                <div id="extraInputs" class="mb-4 hidden transition-all">
-                    <!-- Birthday Selection -->
+                <!-- Input เสริมตามตัวเลือก -->
+                <div id="extraInputs" class="mb-4 hidden">
+                    <!-- วันเกิด -->
                     <div id="birthdayBox" class="hidden">
                         <label class="block text-xs text-slate-300 mb-1">เลือกวันเกิดของคุณ</label>
-                        <select id="birthDayVal" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white">
+                        <select id="birthDayVal" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
                             <option value="อาทิตย์">วันอาทิตย์</option>
                             <option value="จันทร์">วันจันทร์</option>
                             <option value="อังคาร">วันอังคาร</option>
@@ -120,95 +99,85 @@
                             <option value="เสาร์">วันเสาร์</option>
                         </select>
                     </div>
-                    <!-- Dream Input -->
+                    <!-- ความฝัน -->
                     <div id="dreamBox" class="hidden">
-                        <label class="block text-xs text-slate-300 mb-1">พิมพ์คำฝันหรือสิ่งแวดล้อมที่พบเห็น</label>
-                        <input type="text" id="dreamVal" placeholder="เช่น ฝันเห็นงูใหญ่, ฝันว่าจับปลาช่อน" class="w-full bg-slate-900/90 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500">
+                        <label class="block text-xs text-slate-300 mb-1">พิมพ์เรื่องราวความฝันสั้นๆ</label>
+                        <input type="text" id="dreamVal" placeholder="เช่น ฝันเห็นงูใหญ่, ฝันว่าจับปลา" class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition">
                     </div>
                 </div>
 
-                <button onclick="calculateLottery()" class="w-full bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-amber-500/20 active:scale-[0.99] flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i> คำนวณแนวทางตัวเลข
+                <button onclick="calculateLottery()" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition shadow-lg transform active:scale-[0.99]">
+                    คำนวณตัวเลขทำนาย
                 </button>
-            </section>
+            </div>
 
-            <!-- 2. Football Matches Module -->
-            <section class="glass-panel p-5 rounded-2xl shadow-2xl border-t-2 border-t-emerald-500/50">
-                <div class="flex justify-between items-center mb-4 border-b border-slate-700/80 pb-3">
+            <!-- 2. วิเคราะห์ผลบอลคืนนี้ -->
+            <div class="bg-slate-900/80 backdrop-blur-md p-5 rounded-2xl border border-slate-700/80 shadow-2xl">
+                <div class="flex justify-between items-center mb-4">
                     <h2 class="text-lg font-bold text-emerald-400 flex items-center gap-2">
-                        <i class="fa-solid fa-futbol text-emerald-400"></i> วิเคราะห์ผลบอลคืนนี้
+                        <i class="fa-solid fa-futbol"></i> วิเคราะห์ผลบอลคืนนี้
                     </h2>
-                    <span class="text-xs text-emerald-300 bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/30">Matchday Analytics</span>
+                    <span class="text-xs text-slate-400" id="matchDate">โปรแกรมประจำคืนนี้</span>
                 </div>
                 <div id="footballMatches" class="space-y-3">
-                    <!-- Rendered via JS -->
+                    <!-- Render Match Cards via JS -->
                 </div>
-            </section>
+            </div>
 
-            <!-- 3. Basketball Matches Module -->
-            <section class="glass-panel p-5 rounded-2xl shadow-2xl border-t-2 border-t-orange-500/50">
-                <div class="flex justify-between items-center mb-4 border-b border-slate-700/80 pb-3">
-                    <h2 class="text-lg font-bold text-orange-400 flex items-center gap-2">
-                        <i class="fa-solid fa-basketball text-orange-400"></i> วิเคราะห์บาสเกตบอล NBA คืนนี้
-                    </h2>
-                    <span class="text-xs text-orange-300 bg-orange-500/20 px-2.5 py-0.5 rounded-full border border-orange-500/30">NBA Pace & PPG</span>
-                </div>
+            <!-- 3. วิเคราะห์บาสเกตบอล NBA คืนนี้ -->
+            <div class="bg-slate-900/80 backdrop-blur-md p-5 rounded-2xl border border-slate-700/80 shadow-2xl">
+                <h2 class="text-lg font-bold text-orange-400 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-basketball"></i> วิเคราะห์บาสเกตบอล NBA คืนนี้
+                </h2>
                 <div id="basketballMatches" class="space-y-3">
-                    <!-- Rendered via JS -->
+                    <!-- Render Match Cards via JS -->
                 </div>
-            </section>
+            </div>
 
         </div>
 
-        <!-- Right Column: Interactive AI Assistant Panel (5 Cols) -->
-        <div class="lg:col-span-5 flex flex-col h-[620px] lg:h-auto glass-panel rounded-2xl border border-slate-700/80 shadow-2xl overflow-hidden">
+        <!-- Right Column: Interactive AI Assistant (5 cols) -->
+        <!-- ล็อกความสูงคงที่เพื่อให้ข้อความเลื่อนเฉพาะด้านใน ไม่ยาวลงไปเรื่อยๆ -->
+        <div class="lg:col-span-5 h-[480px] lg:h-[550px] bg-slate-900/90 backdrop-blur-md rounded-2xl border border-amber-500/30 shadow-2xl flex flex-col overflow-hidden sticky top-24">
             
-            <!-- AI Header with Toggle Switch -->
-            <div class="p-4 bg-slate-900/80 border-b border-slate-700/80 flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <div class="relative">
-                        <div class="w-3 h-3 rounded-full bg-emerald-500"></div>
-                        <div class="w-3 h-3 rounded-full bg-emerald-500 absolute top-0 left-0 animate-ping opacity-75"></div>
-                    </div>
-                    <span class="text-sm font-bold text-amber-300 flex items-center gap-1.5">
-                        <i class="fa-solid fa-robot"></i> AI Assistant Engine
-                    </span>
+            <!-- Chat Header (Fixed) -->
+            <div class="p-4 bg-slate-950/80 border-b border-slate-800 flex items-center justify-between shrink-0">
+                <div class="flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
+                    <span class="text-sm font-bold text-slate-200">AI Assistant Predictor</span>
                 </div>
                 
-                <!-- AI Switch -->
-                <div class="flex items-center gap-2 bg-slate-800 px-3 py-1 rounded-full border border-slate-700">
-                    <span class="text-xs text-slate-300 font-medium">โหมด AI</span>
+                <!-- AI Switch (เปิด-ปิด ระบบ AI) -->
+                <div class="flex items-center gap-2">
+                    <span class="text-xs text-slate-400">ระบบ AI:</span>
                     <label class="relative inline-flex items-center cursor-pointer">
                         <input type="checkbox" id="aiToggle" class="sr-only peer" checked>
-                        <div class="w-8 h-4 bg-slate-600 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-amber-500"></div>
+                        <div class="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-amber-500"></div>
                     </label>
                 </div>
             </div>
 
-            <!-- Chat Message Box -->
-            <div id="chatBox" class="flex-1 p-4 overflow-y-auto space-y-4 text-xs sm:text-sm">
-                <!-- System Welcome Message -->
+            <!-- Chat Messages Box (Scrollable area) -->
+            <div id="chatBox" class="flex-1 p-4 overflow-y-auto space-y-4 text-sm custom-scrollbar">
                 <div class="flex gap-3">
-                    <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-400 text-slate-950 flex items-center justify-center font-bold text-xs shrink-0 shadow-md">
-                        AI
-                    </div>
-                    <div class="bg-slate-800/90 p-3.5 rounded-2xl rounded-tl-none border border-slate-700 text-slate-200 leading-relaxed shadow-md">
-                        สวัสดีครับ! ผมคือ AI ประจำระบบวิเคราะห์สถิติ <br>
-                        คุณสามารถพิมพ์สอบถามแนวทางหวย ผลบอล ผลบาส หรือพิมพ์ความฝันได้ทันทีครับ
+                    <div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs shrink-0">AI</div>
+                    <div class="bg-slate-800/80 p-3 rounded-2xl rounded-tl-none border border-slate-700 text-slate-200 text-xs leading-relaxed">
+                        สวัสดีครับ! ผมเป็น AI ผู้ช่วยวิเคราะห์ตัวเลขและผลกีฬา<br>
+                        คุณสามารถเปิด/ปิดระบบ AI ได้ที่มุมขวาบน หรือพิมพ์ถามเรื่องหวย บอล บาส ได้ทันทีครับ
                     </div>
                 </div>
             </div>
 
-            <!-- Chat Input Form -->
-            <form id="chatForm" onsubmit="handleChatSubmit(event)" class="p-3 border-t border-slate-700/80 bg-slate-900/90 flex gap-2">
+            <!-- Chat Input Form (Fixed at bottom) -->
+            <form id="chatForm" onsubmit="handleChatSubmit(event)" class="p-3 border-t border-slate-800 flex gap-2 bg-slate-950/80 shrink-0">
                 <input 
                     type="text" 
                     id="userInput" 
-                    placeholder="พิมพ์คำถาม เช่น 'ขอหวยลาว', 'ทำนายฝันเห็นปลา'..." 
-                    class="flex-1 bg-slate-800/90 border border-slate-700 rounded-xl px-4 py-2 text-xs sm:text-sm text-white placeholder-slate-400 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500"
+                    placeholder="ถาม AI เช่น 'ทำนายฝันเห็นจับปลา'..." 
+                    class="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-4 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition"
                     required
                 >
-                <button type="submit" class="bg-gradient-to-tr from-amber-500 to-yellow-500 hover:from-amber-600 hover:to-yellow-600 text-slate-950 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm transition-all shadow-md active:scale-95">
+                <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-slate-950 font-bold px-4 py-2 rounded-xl text-sm transition">
                     <i class="fa-solid fa-paper-plane"></i>
                 </button>
             </form>
@@ -217,7 +186,7 @@
     </main>
 
     <!-- Footer Credit -->
-    <footer class="glass-panel border-t border-slate-800 p-4 text-center text-xs text-slate-400 mt-6">
+    <footer class="bg-slate-950/90 border-t border-slate-800 p-4 text-center text-xs text-slate-400 mt-auto">
         <p>© 2026 Sports & Lottery Predictor Engine — <span class="text-amber-400 font-semibold">ทำนายผลโดย Bank Basketman</span></p>
     </footer>
 
@@ -226,17 +195,19 @@
         const CREDIT_TEXT = "ทำนายผลโดย Bank Basketman";
         const chatBox = document.getElementById('chatBox');
 
-        // Match Data
+        // โปรแกรมบอลคืนนี้ (จำลองข้อมูลคู่แข่งขันประจำคืน)
         const tonightFootball = [
             { home: "Arsenal", away: "Chelsea", league: "Premier League", time: "02:00 น.", homeAvg: 2.1, awayAvg: 1.1 },
             { home: "Real Madrid", away: "Barcelona", league: "La Liga", time: "03:00 น.", homeAvg: 2.3, awayAvg: 1.8 }
         ];
 
+        // โปรแกรมบาส NBA คืนนี้
         const tonightBasketball = [
             { home: "LA Lakers", away: "GS Warriors", time: "08:30 น.", homePpg: 116.5, awayPpg: 118.2 },
             { home: "Boston Celtics", away: "Milwaukee Bucks", time: "09:00 น.", homePpg: 120.1, awayPpg: 114.8 }
         ];
 
+        // โหลดข้อมูลคู่แข่งขันลงในหน้าเว็บ
         function renderMatches() {
             // Render Football
             const fbContainer = document.getElementById('footballMatches');
@@ -245,13 +216,13 @@
                 const expAway = Math.round(m.awayAvg * 0.9);
                 const winner = expHome > expAway ? m.home : (expHome < expAway ? m.away : "เสมอ");
                 return `
-                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/80 flex justify-between items-center text-xs hover:border-emerald-500/40 transition">
+                    <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
                         <div>
-                            <span class="text-emerald-400 font-medium">[${m.league}] เวลา ${m.time}</span>
-                            <div class="text-sm font-bold text-slate-100 mt-0.5">${m.home} vs ${m.away}</div>
-                            <div class="text-slate-400 text-[11px] mt-0.5">คาดการณ์ประตู: ${expHome} - ${expAway} (${winner} มีเป้าชนะสูง)</div>
+                            <span class="text-emerald-400 font-semibold">[${m.league}] ${m.time}</span>
+                            <div class="text-sm font-bold mt-1">${m.home} vs ${m.away}</div>
+                            <div class="text-slate-400 text-[11px] mt-0.5">คาดการณ์สกอร์: ${expHome} - ${expAway} (${winner} มีโอกาสชนะสูง)</div>
                         </div>
-                        <button onclick="askAIMatch('football', '${m.home}', '${m.away}')" class="bg-emerald-500/20 hover:bg-emerald-500 text-emerald-300 hover:text-slate-950 font-medium px-3 py-1.5 rounded-lg border border-emerald-500/40 text-[11px] transition">
+                        <button onclick="askAIMatch('football', '${m.home}', '${m.away}')" class="bg-slate-800 hover:bg-emerald-600 text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg border border-slate-700 text-[11px] transition">
                             ถาม AI
                         </button>
                     </div>
@@ -264,13 +235,13 @@
                 const totalScore = Math.round(m.homePpg + m.awayPpg);
                 const winner = m.homePpg > m.awayPpg ? m.home : m.away;
                 return `
-                    <div class="bg-slate-900/80 p-3 rounded-xl border border-slate-700/80 flex justify-between items-center text-xs hover:border-orange-500/40 transition">
+                    <div class="bg-slate-950/70 p-3.5 rounded-xl border border-slate-800 flex justify-between items-center text-xs">
                         <div>
-                            <span class="text-orange-400 font-medium">[NBA] เวลา ${m.time}</span>
-                            <div class="text-sm font-bold text-slate-100 mt-0.5">${m.home} vs ${m.away}</div>
-                            <div class="text-slate-400 text-[11px] mt-0.5">สกอร์รวมคาดการณ์: ~${totalScore} แต้ม (เน้นต่อ ${winner})</div>
+                            <span class="text-orange-400 font-semibold">[NBA] ${m.time}</span>
+                            <div class="text-sm font-bold mt-1">${m.home} vs ${m.away}</div>
+                            <div class="text-slate-400 text-[11px] mt-0.5">สกอร์รวมคาดการณ์: ~${totalScore} แต้ม (ต่อ ${winner})</div>
                         </div>
-                        <button onclick="askAIMatch('basketball', '${m.home}', '${m.away}')" class="bg-orange-500/20 hover:bg-orange-500 text-orange-300 hover:text-slate-950 font-medium px-3 py-1.5 rounded-lg border border-orange-500/40 text-[11px] transition">
+                        <button onclick="askAIMatch('basketball', '${m.home}', '${m.away}')" class="bg-slate-800 hover:bg-orange-600 text-slate-300 hover:text-white px-2.5 py-1.5 rounded-lg border border-slate-700 text-[11px] transition">
                             ถาม AI
                         </button>
                     </div>
@@ -278,6 +249,7 @@
             }).join('');
         }
 
+        // สลับฟิลด์ข้อมูลเสริมการทำนายหวย
         function toggleLotteryInputs() {
             const method = document.getElementById('analysisMethod').value;
             const extraBox = document.getElementById('extraInputs');
@@ -297,6 +269,7 @@
             }
         }
 
+        // คำนวณหวย
         function calculateLottery() {
             const type = document.getElementById('lotteryType').value;
             const typeName = type === 'thai' ? '🇹🇭 หวยไทย' : '🇱🇦 หวยลาว';
@@ -304,26 +277,21 @@
 
             let num2 = Math.floor(10 + Math.random() * 90);
             let num3 = Math.floor(100 + Math.random() * 900);
-            let num4 = Math.floor(1000 + Math.random() * 9000);
-            let detail = "คำนวณสถิติตัวเลขย้อนหลัง";
+            let detail = "วิเคราะห์จากสถิติความถี่";
 
             if (method === 'birthday') {
                 const day = document.getElementById('birthDayVal').value;
-                detail = `วิเคราะห์ดวงมงคลตามวันเกิด (${day})`;
+                detail = `คำนวณตามดวงวันเกิด (${day})`;
             } else if (method === 'dream') {
-                const dream = document.getElementById('dreamVal').value || "ความฝันเกี่ยวกับโชคลาภ";
-                detail = `ถอดรหัสตัวเลขทำนายความฝัน (${dream})`;
+                const dream = document.getElementById('dreamVal').value || "ความฝัน";
+                detail = `ทำนายจากคำทำนายฝัน (${dream})`;
             }
 
-            let resultText = `🎯 **สรุปแนวทาง ${typeName}**\n• ข้อมูล: ${detail}\n• เลขเด็ด 2 ตัว: **${num2}**\n• เลขเด็ด 3 ตัว: **${num3}**`;
-            if (type === 'lao') {
-                resultText += `\n• ชุด 4 ตัวลาวแนะนำ: **${num4}**`;
-            }
-            resultText += `\n\n--- ${CREDIT_TEXT} ---`;
-
+            const resultText = `🎯 **สรุปแนวทาง ${typeName}**\n• ข้อมูล: ${detail}\n• เลขเด็ด 2 ตัว: **${num2}**\n• เลขเด็ด 3 ตัว: **${num3}**\n\n--- ${CREDIT_TEXT} ---`;
             appendMessage('ai', resultText);
         }
 
+        // ถาม AI เรื่องคู่บอล/บาส
         function askAIMatch(sport, home, away) {
             const prompt = sport === 'football' 
                 ? `ขอวิเคราะห์บอลคืนนี้คู่ ${home} vs ${away}`
@@ -333,14 +301,15 @@
             handleChatSubmit(new Event('submit'));
         }
 
+        // เพิ่มข้อความลงใน Chatbox และ Auto Scroll เฉพาะในช่อง AI
         function appendMessage(sender, text) {
             const isUser = sender === 'user';
             const msgDiv = document.createElement('div');
             msgDiv.className = `flex gap-3 ${isUser ? 'flex-row-reverse' : ''}`;
 
             const avatarHtml = isUser 
-                ? `<div class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 flex items-center justify-center font-bold text-xs shrink-0">คุณ</div>`
-                : `<div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 flex items-center justify-center font-bold text-xs shrink-0">AI</div>`;
+                ? `<div class="w-8 h-8 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-500/30 flex items-center justify-center font-bold text-xs shrink-0">คุณ</div>`
+                : `<div class="w-8 h-8 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs shrink-0">AI</div>`;
 
             const bgStyle = isUser 
                 ? 'bg-indigo-600/90 text-white rounded-tr-none' 
@@ -348,7 +317,7 @@
 
             msgDiv.innerHTML = `
                 ${avatarHtml}
-                <div class="${bgStyle} p-3 rounded-2xl max-w-[85%] leading-relaxed whitespace-pre-line shadow-md">
+                <div class="${bgStyle} p-3 rounded-2xl max-w-[85%] text-xs leading-relaxed whitespace-pre-line shadow-md">
                     ${text}
                 </div>
             `;
@@ -357,6 +326,7 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
+        // จัดการเมื่อส่งข้อความใน Chat
         function handleChatSubmit(e) {
             e.preventDefault();
             const inputEl = document.getElementById('userInput');
@@ -367,46 +337,49 @@
             appendMessage('user', text);
             inputEl.value = '';
 
+            // ตรวจสอบว่าเปิดระบบ AI อยู่หรือไม่
             if (!isAiActive) {
                 setTimeout(() => {
-                    appendMessage('ai', `⚠️ **ระบบ AI ปิดใช้งานอยู่**\nกรุณาเปิดสวิตช์ AI ที่มุมขวาบนของช่องแชตเพื่อใช้งานระบบวิเคราะห์อัตโนมัติครับ\n\n--- ${CREDIT_TEXT} ---`);
+                    appendMessage('ai', `⚠️ **ระบบ AI ปิดใช้งานอยู่**\nคุณสามารถเปิดสวิตช์ AI ที่มุมขวาบนของแชตเพื่อรับการวิเคราะห์อัตโนมัติครับ\n\n--- ${CREDIT_TEXT} ---`);
                 }, 300);
                 return;
             }
 
+            // ประมวลผลคำตอบ AI
             setTimeout(() => {
                 const response = getAIResponse(text);
                 appendMessage('ai', response);
-            }, 400);
+            }, 500);
         }
 
+        // AI Response Engine
         function getAIResponse(query) {
             const q = query.toLowerCase();
 
             if (q.includes('ลาว') || q.includes('หวยลาว')) {
                 const n2 = Math.floor(10 + Math.random() * 90);
                 const n4 = Math.floor(1000 + Math.random() * 9000);
-                return `🇱🇦 **แนวทางวิเคราะห์หวยลาวพัฒนา**\n• เด่นเลขท้าย 2 ตัว: **${n2}**\n• เลขชุด 4 ตัวแนะนำ: **${n4}**\n• คำแนะนำ: กระจายความเสี่ยงในเลขเด่น\n\n--- ${CREDIT_TEXT} ---`;
+                return `🇱🇦 **วิเคราะห์แนวทางหวยลาวพัฒนา**\n• เลขเด่น 2 ตัว: **${n2}**\n• ชุด 4 ตัวแนะนำ: **${n4}**\n\n--- ${CREDIT_TEXT} ---`;
             }
 
             if (q.includes('หวย') || q.includes('ฝัน') || q.includes('เลข')) {
                 const n2 = Math.floor(10 + Math.random() * 90);
                 const n3 = Math.floor(100 + Math.random() * 900);
-                return `🎯 **แนวทางตัวเลขเด็ดประจำงวด**\n• เลขท้าย 2 ตัว: **${n2}**\n• เลขท้าย 3 ตัว: **${n3}**\n• วิเคราะห์จากสถิติรอบล่าสุด\n\n--- ${CREDIT_TEXT} ---`;
+                return `🎯 **วิเคราะห์ตัวเลขเด็ด**\n• เลขท้าย 2 ตัว: **${n2}**\n• เลขท้าย 3 ตัว: **${n3}**\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            if (q.includes('บอล') || q.includes('ฟุตบอล') || q.includes('อาร์เซน่อล') || q.includes('เชลซี')) {
-                return `⚽ **บทวิเคราะห์ฟุตบอลคืนนี้**\n• Arsenal vs Chelsea: อาร์เซน่อลมีเกมในบ้านแข็งแกร่ง คาดว่าชนะ 2-1\n• Real Madrid vs Barcelona: เกมรุกเปิดหน้าแลก น่าจะจบสกอร์สูงเกิน 2.5 ประตู\n\n--- ${CREDIT_TEXT} ---`;
+            if (q.includes('บอล') || q.includes('ฟุตบอล')) {
+                return `⚽ **บทวิเคราะห์ฟุตบอลคืนนี้**\n• อาร์เซน่อล vs เชลซี: คาดว่าครองบอลเหนือกว่า ชนะ 2-1\n• เรอัล มาดริด vs บาร์เซโลน่า: เกมเปิดน่าจะยิงกันเยอะ สกอร์สูง\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            if (q.includes('บาส') || q.includes('nba') || q.includes('ลakers')) {
-                return `🏀 **บทวิเคราะห์บาสเกตบอล NBA คืนนี้**\n• LA Lakers vs GS Warriors: เกมไว เน้นยิง 3 แต้ม แต้มรวมคาดว่าทะลุ 230+ แต้ม\n• Boston vs Bucks: บอสตันเกมรับเหนียวแน่น มีสิทธิ์ชนะต่อแต้ม\n\n--- ${CREDIT_TEXT} ---`;
+            if (q.includes('บาส') || q.includes('nba')) {
+                return `🏀 **บทวิเคราะห์บาสเกตบอล NBA คืนนี้**\n• LA Lakers vs GS Warriors: เน้นเกมเร็ว แต้มรวมคาดว่าจะเกิน 230 แต้ม\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            return `สวัสดีครับ! สามารถพิมพ์ถามข้อมูลเกี่ยวกับ "หวยไทย", "หวยลาว", "ทำนายฝัน", "บอลคืนนี้" หรือ "บาส NBA" ได้เลยครับ\n\n--- ${CREDIT_TEXT} ---`;
+            return `ขออภัยครับ ลองพิมพ์ถามคำถามเกี่ยวกับ "หวยไทย", "หวยลาว", "ทำนายฝัน", "วิเคราะห์บอล" หรือ "บาส NBA" ได้เลยครับ\n\n--- ${CREDIT_TEXT} ---`;
         }
 
-        // Initialize App on Load
+        // Initialize App
         window.onload = function() {
             renderMatches();
         };
