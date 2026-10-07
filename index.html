@@ -35,7 +35,42 @@
         }
     </style>
 </head>
-<body class="text-white min-h-screen flex flex-col antialiased">
+<body class="text-white min-h-screen flex flex-col antialiased relative">
+
+    <!-- Intro Video Overlay (วิดีโอต้อนรับก่อนเข้าหน้าเว็บ) -->
+    <div id="introModal" class="fixed inset-0 z-50 bg-slate-950/90 backdrop-blur-lg flex items-center justify-center p-4 transition-opacity duration-500">
+        <div class="relative w-full max-w-3xl bg-slate-900 border border-amber-500/40 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+            <!-- Modal Header -->
+            <div class="p-4 bg-slate-950/80 border-b border-slate-800 flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-play-circle text-amber-400"></i>
+                    <span class="text-sm font-bold text-amber-300">วิดีโอแนะนำระบบ — Bank Basketman</span>
+                </div>
+                <button onclick="closeIntroVideo()" class="text-slate-400 hover:text-amber-400 transition text-lg px-2">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Video Player Container -->
+            <div class="relative aspect-video bg-black flex items-center justify-center overflow-hidden">
+                <video id="introVideo" class="w-full h-full object-contain" autoplay muted playsinline controls>
+                    <source src="https://ttl.space/LkIHyV0d6L" type="video/mp4">
+                    เบราว์เซอร์ของคุณไม่รองรับการเล่นวิดีโอ
+                </video>
+            </div>
+
+            <!-- Modal Footer / Enter Button -->
+            <div class="p-4 bg-slate-950/90 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-3">
+                <span class="text-xs text-slate-400 text-center sm:text-left">
+                    <i class="fa-solid fa-circle-info text-amber-400/80 mr-1"></i> ยินดีต้อนรับสู่ระบบวิเคราะห์ผลกีฬาและตัวเลข
+                </span>
+                <button onclick="closeIntroVideo()" class="w-full sm:w-auto bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-lg transform active:scale-95 flex items-center justify-center gap-2">
+                    <span>เข้าสู่หน้าหลัก</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Header -->
     <header class="bg-slate-900/80 backdrop-blur-md border-b border-amber-500/20 p-4 sticky top-0 z-20 shadow-lg">
@@ -124,7 +159,7 @@
                 </div>
             </div>
 
-            <!-- 3. วิเคราะห์บาสเกตบอล NBA คืนนี้ -->
+            <!-- 3. วิเคราะห์บาสเกตบอล NBA คคืนนี้ -->
             <div class="bg-slate-900/80 backdrop-blur-md p-5 rounded-2xl border border-slate-700/80 shadow-2xl">
                 <h2 class="text-lg font-bold text-orange-400 mb-4 flex items-center gap-2">
                     <i class="fa-solid fa-basketball"></i> วิเคราะห์บาสเกตบอล NBA คืนนี้
@@ -146,7 +181,7 @@
                     <span class="text-sm font-bold text-slate-200">AI Assistant Predictor</span>
                 </div>
                 
-                <!-- AI Switch (เปิด-ปิด ระบบ AI) -->
+                <!-- AI Switch -->
                 <div class="flex items-center gap-2">
                     <span class="text-xs text-slate-400">ระบบ AI:</span>
                     <label class="relative inline-flex items-center cursor-pointer">
@@ -193,6 +228,21 @@
     <script>
         const CREDIT_TEXT = "ทำนายผลโดย Bank Basketman";
         const chatBox = document.getElementById('chatBox');
+
+        // ฟังก์ชันปิดวิดีโอต้อนรับ
+        function closeIntroVideo() {
+            const modal = document.getElementById('introModal');
+            const video = document.getElementById('introVideo');
+            if (video) {
+                video.pause();
+            }
+            if (modal) {
+                modal.classList.add('opacity-0');
+                setTimeout(() => {
+                    modal.style.display = 'none';
+                }, 500);
+            }
+        }
 
         // โปรแกรมบอลคืนนี้
         const tonightFootball = [
@@ -301,7 +351,7 @@
             handleChatSubmit(new Event('submit'));
         }
 
-        // เพิ่มข้อความลงใน Chatbox และ Auto Scroll เฉพาะในช่อง AI
+        // เพิ่มข้อความลงใน Chatbox และ Auto Scroll
         function appendMessage(sender, text) {
             const isUser = sender === 'user';
             const msgDiv = document.createElement('div');
@@ -337,7 +387,6 @@
             appendMessage('user', text);
             inputEl.value = '';
 
-            // ตรวจสอบว่าเปิดระบบ AI อยู่หรือไม่
             if (!isAiActive) {
                 setTimeout(() => {
                     appendMessage('ai', `⚠️ **ระบบ AI ปิดใช้งานอยู่**\nคุณสามารถเปิดสวิตช์ AI ที่มุมขวาบนของแชตเพื่อรับการวิเคราะห์อัตโนมัติครับ\n\n--- ${CREDIT_TEXT} ---`);
@@ -345,14 +394,13 @@
                 return;
             }
 
-            // ประมวลผลคำตอบ AI
             setTimeout(() => {
                 const response = getAIResponse(text);
                 appendMessage('ai', response);
             }, 400);
         }
 
-        // Extended AI Response Engine (คลังคำถาม-คำตอบ AI ที่ขยายครอบคลุมมากขึ้น)
+        // Extended AI Response Engine
         function getAIResponse(query) {
             const q = query.toLowerCase();
 
@@ -369,7 +417,7 @@
                 return `🌙 **ทำนายฝันเชิงตัวเลข (${dreamType})**\n• ตัวเลขนำโชค 2 ตัว: **${n2}**\n• ตัวเลขนำโชค 3 ตัว: **${n3}**\n• คำแนะนำ: เด่นเลข 6, 8, 9 เสริมดวงโชคลาภ\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 2. หวยลาว / หวยพัฒนา
+            // 2. หวยลาว
             if (q.includes('ลาว') || q.includes('หวยลาว') || q.includes('ลาวพัฒนา')) {
                 const n2 = Math.floor(10 + Math.random() * 90);
                 const n3 = Math.floor(100 + Math.random() * 900);
@@ -384,33 +432,33 @@
                 return `🇻🇳 **วิเคราะห์แนวทางหวยฮานอย / หวยหุ้น**\n• เลขเด่นวันนี้: **${n2}**\n• เลขเจาะ 3 ตัว: **${n3}**\n• เน้นฟันตัวเดียว: **${Math.floor(Math.random()*10)}**\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 4. ทะเบียนรถ / อายุ / วันเกิด
+            // 4. ทะเบียนรถ / อายุ
             if (q.includes('ทะเบียน') || q.includes('รถ') || q.includes('อายุ') || q.includes('บ้านเลขที่')) {
                 const n2 = Math.floor(10 + Math.random() * 90);
                 const n3 = Math.floor(100 + Math.random() * 900);
                 return `🚗 **วิเคราะห์โชคลาภจากทะเบียน / เลขใกล้ตัว**\n• เลขมงคลเน้นตัดสลับ: **${n2}**\n• ชุด 3 ตัวเน้นความถี่: **${n3}**\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 5. หวยไทย / สลากกินแบ่ง / แนวทางทั่วไป
+            // 5. หวยไทย
             if (q.includes('หวย') || q.includes('เลข') || q.includes('เด็ด') || q.includes('งวดนี้') || q.includes('สลาก')) {
                 const n2 = Math.floor(10 + Math.random() * 90);
                 const n3 = Math.floor(100 + Math.random() * 900);
                 return `🎯 **สรุปแนวทางสลากกินแบ่งรัฐบาล**\n• เลขท้าย 2 ตัวเน้นๆ: **${n2}**\n• เลขท้าย 3 ตัวเน้นๆ: **${n3}**\n• เลขเด่นประจำงวด: **${Math.floor(Math.random()*10)}**\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 6. บอลเต็ง / บอลเดี่ยว
+            // 6. บอลเต็ง
             if (q.includes('เต็ง') || q.includes('บอลเด็ด') || q.includes('ตัวเดียว')) {
                 const teams = ["Arsenal", "Real Madrid", "Man City", "Bayern Munich", "PSG"];
                 const team = teams[Math.floor(Math.random() * teams.length)];
                 return `⚽ **วิเคราะห์บอลเต็งประจำวัน**\n• ทีมแนะนำ: **${team}**\n• ทรรศนะ: ฟอร์มการเล่น 5 นัดหลังสุดชนะรวด เกมรุกดุดัน มีโอกาสกินราคาเกิน 80%\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 7. บอลชุด / บอลสเต็ป
+            // 7. บอลชุด
             if (q.includes('ชุด') || q.includes('สเต็ป') || q.includes('บอลชุด')) {
                 return `⚽ **จัดตัวเลือกบอลชุด (สเต็ป 3)**\n1. Arsenal (ต่อ 0.5/1)\n2. Real Madrid (ต่อ 1.0)\n3. Man City (สูง 2.5/3)\n• ความน่าจะเป็น: ผ่าน 3 ตัวสูงมาก\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 8. สกอร์สูง / ต่ำ (บอล)
+            // 8. สกอร์สูง / ต่ำ
             if (q.includes('สูง') || q.includes('ต่ำ') || q.includes('สกอร์')) {
                 return `⚽ **วิเคราะห์แนวทางสกอร์ สูง/ต่ำ**\n• คู่เน้นสูงคืนนี้: Arsenal vs Chelsea (คาดว่าจะยิงรวมกันเกิน 3 ประตู)\n• คู่เน้นต่ำคืนนี้: Juventus vs Inter Milan (เน้นเกมรัดกุม)\n\n--- ${CREDIT_TEXT} ---`;
             }
@@ -420,23 +468,22 @@
                 return `⚽ **วิเคราะห์ฟุตบอลประจำวัน**\n• อาร์เซน่อล vs เชลซี: คาดครองบอลเหนือกว่า ชนะ 2-1\n• เรอัล มาดริด vs บาร์เซโลน่า: เกมเปิดยิงกันเยอะ คาดสกอร์ 3-2\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 10. บาส NBA / บาสเกตบอล
+            // 10. บาส NBA
             if (q.includes('บาส') || q.includes('nba') || q.includes('บาสเกตบอล') || q.includes('เลเกอร์ส') || q.includes('แต้ม')) {
                 return `🏀 **วิเคราะห์ผลบาสเกตบอล NBA**\n• LA Lakers vs GS Warriors: เกมเร็ว เน้นเกมรุก ยิง 3 แต้มเยอะ\n• แต้มรวมคาดการณ์: สูงกว่า 230 แต้ม\n• ทีมคาดว่าจะชนะ: LA Lakers (เบียดชนะท้ายเกม)\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // 11. ถามชื่อ / ผู้สร้าง / เครดิต
+            // 11. ผู้สร้าง / เครดิต
             if (q.includes('ใคร') || q.includes('คนทำ') || q.includes('สร้าง') || q.includes('bank') || q.includes('basketman')) {
-                return `🙋‍♂️ ระบบทำนายนี้พัฒนาและวิเคราะห์ผลโดย **Bank Basketman** ครับ! รวบรวมสถิติกีฬาและแนวทางตัวเลขแบบครบวงจร\n\n--- ${CREDIT_TEXT} ---`;
+                return `🙋‍♂️ ระบบทำนายนี้พัฒนาและวิเคราะห์ผลโดย **Bank Basketman** ครับ!\n\n--- ${CREDIT_TEXT} ---`;
             }
 
             // 12. ทักทาย
             if (q.includes('สวัสดี') || q.includes('หวัดดี') || q.includes('ดีครับ') || q.includes('ดีค่ะ') || q.includes('hello') || q.includes('hi')) {
-                return `สวัสดีครับ! ยินดีต้อนรับสู่ AI Analytics พิมพ์ถามเรื่องหวย บอล บาส ได้เลยครับ ยินดีให้บริการครับ 😊\n\n--- ${CREDIT_TEXT} ---`;
+                return `สวัสดีครับ! ยินดีต้อนรับสู่ AI Analytics พิมพ์ถามเรื่องหวย บอล บาส ได้เลยครับ 😊\n\n--- ${CREDIT_TEXT} ---`;
             }
 
-            // คำตอบเริ่มต้นกรณีไม่ตรงคีย์เวิร์ด
-            return `ยินดีให้บริการครับ! คุณสามารถถามเพิ่มเติมได้ เช่น:\n• "ขอแนวทางหวยไทยงวดนี้"\n• "ทำนายฝันเห็นงูใหญ่"\n• "ขอเลขฮานอย / หวยลาว"\n• "วิเคราะห์บอลเต็ง / บอลชุดคืนนี้"\n• "วิเคราะห์บาส NBA"\n\n--- ${CREDIT_TEXT} ---`;
+            return `ยินดีให้บริการครับ! ลองพิมพ์ถามเพิ่มเติม เช่น:\n• "ขอแนวทางหวยไทยงวดนี้"\n• "ทำนายฝันเห็นงูใหญ่"\n• "ขอเลขฮานอย / หวยลาว"\n• "วิเคราะห์บอลเต็ง / บอลชุดคืนนี้"\n• "วิเคราะห์บาส NBA"\n\n--- ${CREDIT_TEXT} ---`;
         }
 
         // Initialize App
